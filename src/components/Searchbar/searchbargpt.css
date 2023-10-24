@@ -1,0 +1,28 @@
+.searchbar {
+    width: 40rem;
+}
+
+/* @media (max-width: 1920px) {
+    .searchbar {
+        width: 50rem;
+        margin-right: 60px;
+    } 
+} */
+@media (max-width: 955px) {
+    .searchbar {
+        width: 20rem;
+    } 
+}
+
+@media (max-width: 855px) {
+    .searchbar {
+        width: 17rem;
+
+    } 
+}
+
+@media (max-width: 768px) {
+    .searchbar {
+        width: 13rem;
+    } 
+}
