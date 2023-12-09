@@ -1,113 +1,53 @@
-.active {
+
+.active{
     background-color: #1d4ed8;
 }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #535969;
-    color: white;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-nav .title {
-    font-size: 1.0rem;
-    margin: 1rem;
-    font-weight: bold;
-    text-decoration: none;
-    color: white;
-}
-
-nav ul {
-    display: flex;
-}
-
-nav ul li {
-    list-style: none;
-    /* width: 80px;  */
-    text-align: center;
-}
-
-nav ul li button {
-    margin-Right: 10px;
-    display: block;
-    color: white;
-    padding: 0.7rem;
-    /* margin: 1rem 0.5rem; */
-    /* border-radius: 0.5rem; */
-    font-size: 30;
-    cursor: pointer;
-    margin-top: 13px;
-    border: none;
-    background-color: #535969;
-    border-radius: 0.5rem;
-}
-
-nav ul li button:not(.active):hover {
-    font-weight: Bold;
-}
-
-nav .menu {
-    display: none;
-    position: absolute;
-    top: 0.75rem;
-    right: 0.5rem;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 2.25rem;
-    height: 2rem;
-}
-
-nav .menu span {
-    height: 0.4rem;
-    width: 100%;
-    background-color: #fff;
-    border-radius: 0.2rem;
-}
-
-.listvehicle {
-    width: 200px;
-    background-color: white;
-    color: #283043;
-    cursor: pointer;
-    margin-right: 40px;
-    margin-left: 5px;
-}
-
-.logoutButton {
-    width: 100px;
-    background-color: white;
-    color: #283043;
-    cursor: pointer;
-    margin-right: 40px;
-    margin-left: 5px;
-}
-
 .mainbanner {
-    background-image: url('../../Assets/Images/bannerbg1.jpg');
+    background-image: url('../../Assets/Images/aa.jpg');
     width: 100%;
-    height: calc(80vh - 100px);
+    height: calc(100vh - 230px);
     background-size: cover;
-    /* display: flex; */
-    margin-bottom: 5%;
-    color: #d4d6d9;
+    background-position: center;
+    color: white;
     padding-top: 120px;
     padding-left: 80px;
+    box-sizing: border-box;
+    margin-bottom: 5%;
+}
+
+.carsavaialble {
+    background-image: url('../../Assets/Images/bb.png');
+    width: 80%;
+    /* height: calc(100vh - 230px); */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding-top: 120px;
+    margin-left: 130px;
+    box-sizing: border-box;
+    margin-bottom: 5%;
 }
 
 .mainbanner h1 {
-    /* margin-top: 100px; */
+    margin-top: 70px;
+    font-size: 45px;
+    /* Adjust the font size for larger screens */
+}
+
+.mainbanner h3 {
+    font-size: 35px;
+    color: blue
+        /* Adjust the font size for larger screens */
 }
 
 .prod-div {
     margin-top: 50px;
     margin-bottom: 10px;
-    height: 300px;
-    width: 25%;
-    min-width: 250px;
+    height: 280px;
+    width: 20%;
+    min-width: 280px;
+    margin-right: 1px;
     /* position: absolute; */
 }
 
@@ -117,7 +57,7 @@ nav .menu span {
 }
 
 .img-div img {
-    width: 260px;
+    width: 100%;
     height: 150px;
 }
 
@@ -135,29 +75,28 @@ nav .menu span {
 }
 
 .prod-rate {
-    color: #283043;
+    color: rgb(161, 0, 0);
     margin-top: -10px;
     font-weight: bold;
     text-align: center;
 }
 
-
-  
-  .prod-div:hover {
+.prod-div:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-  
+}
+
 
 .mainFooter {
-    background-color: #d4d6d9;
+    background: #171c24;
     width: 100%;
     /* height: 90px; */
-    margin-top: 100px;
+    /* margin-top: 150px; */
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding-bottom: 5px;
     flex-wrap: wrap;
+    min-width: 60%;
     /* display: flex; */
     /* justify */
 }
@@ -167,7 +106,7 @@ nav .menu span {
     align-items: center;
 }
 
-.Footerlistdiv ul li{
+.Footerlistdiv ul li {
     margin-top: 25px;
     list-style: none;
 }
@@ -177,24 +116,25 @@ nav .menu span {
 }
 
 .FooterLogo {
-    color: red;
-    font-size: 1.5rem;
+    color: #fff;
+    /* font-size: 1.5rem; */
     font-weight: bold;
     list-style: none;
     margin-top: 5px;
     cursor: pointer;
+    margin-left: 30px;
 }
 
 .Footerlist {
-    color: #283043;
-    margin-right: 60px;
+    color: white;
+    /* margin-right: 60px; */
     align-items: center;
     cursor: pointer;
 }
 
-.FooterLogo:hover {
+/* .FooterLogo:hover {
     font-weight: bold;
-}
+} */
 
 .Footerlist:hover {
     font-weight: bold;
@@ -250,8 +190,12 @@ nav .menu span {
     font-weight: bold;
 }
 
+.UploadImageInput {
+    text-align: center
+}
+
 .UploadImageButton {
-    width: 120px;
+    width: 150px;
     background-color: #d4d6d9;
     color: #283043;
     cursor: pointer;
@@ -289,6 +233,30 @@ nav .menu span {
     text-align: center;
     /* margin: auto;
     margin-top: 5px; */
+}
+.EditCarButton:hover {
+    font-weight: bold;
+}
+
+.EditCarButton {
+    width: 200px;
+    background-color: #e6e6e6;
+    color: #283043;
+    cursor: pointer;
+    /* margin-right: 40px;
+    margin-left: 5px;
+    margin-Right: 10px; */
+    display: block;
+    padding: 0.7rem;
+    /* margin: 1rem 0.5rem; */
+    border-radius: 0.5rem;
+    font-size: 30;
+    cursor: pointer;
+    /* margin-top: 13px; */
+    text-align: center;
+    /* margin: auto;
+    margin-top: 5px; */
+    margin-right: 10px;
 }
 
 
@@ -331,30 +299,135 @@ nav .menu span {
 }
 
 .transporterbookedCar {
-    display: flex; 
-    flex-wrap: wrap; 
+    display: flex;
+    flex-wrap: wrap;
     justify-content: space-around
 }
 
-@media (max-width: 1920px) {
-    nav ul li a {
-        /* margin-Right: 40px; */
-        /* padding: 0.5rem; */
-    }
+.TransporterBookedCarpic {
+    width: 500px;
+    height: 300px;
+}
 
-    .listvehicle {
-        /* margin-right: 80px; */
+.booknowinput {
+    /* text-align: right; */
+    margin-bottom: 10
+}
+
+.bookedcarpara {
+    font-weight: bold;
+    font-size: 20px
+}
+
+.bookedcarpara2 {
+    font-size: 20px
+}
+.bookedcarpara3 {
+    font-weight: bold;
+    font-size: 20px
+}
+
+.bookedcarpara4 {
+    font-size: 20px
+}
+
+/* .popup2-img {
+    Width: 70px;
+    Height: 70px;
+}
+
+.popup2-para {
+    font-size: 20px;
+    font-family: 'redHat-Bold';
+    margin: 0;
+    margin-top: 22px;
+
+}
+
+.popup2 {
+    display: none;
+    position: fixed;
+    width: 312px;
+    height: 261px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    border-radius: 20px;
+}
+
+#goBackBtn {
+    background: linear-gradient(312.67deg, #F9B401 5.15%, #FCDD8E 134.92%);
+    color: #0B105C;
+    margin-top: 16px;
+    border-radius: 7px;
+    width: 272px;
+    height: 36px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    padding: 2px;
+    font-size: 14px;
+    font-family: 'redHat-Bold';
+    font-weight: 600;
+}  */
+
+@media (max-width: 494px) {
+    .bookedcarpara {
+        font-size: 15px
+    }
+    
+    .bookedcarpara2 {
+        font-size: 15px
+    }
+}
+@media (max-width: 563px) {
+    .bookedcarpara3 {
+        font-size: 15px
+    }
+    
+    .bookedcarpara4 {
+        font-size: 15px
+    }
+}
+@media (max-width: 580px) {
+    .TransporterBookedCarpic {
+        width: 300px;
+        height: 200px;
     }
 }
 
-@media (max-width: 855px) {
-    .listvehicle {
-        width: 160px;
+@media (max-width: 700px) {
+    .UploadImageInput {
+        margin-left: 100px;
+    }
+}
+
+@media (max-width: 1199px) {
+    .booknowinput {
+        /* text-align: left; */
+        padding: '5px'
+    }
+}
+
+@media (max-width: 1200px) {
+    .mainbanner {
+        padding-left: 40px;
     }
 
-    nav ul li a {
-        margin-Right: 5px;
-        padding: 0.5rem;
+    .mainbanner h1 {
+        width: 40%;
+        font-size: 40px;
+        /* Adjust the font size for medium screens */
+    }
+
+    .mainbanner h3 {
+        width: 40%;
+        font-size: 30px;
+        /* Adjust the font size for medium screens */
     }
 }
 
@@ -362,44 +435,105 @@ nav .menu span {
     .transporterbookedCar {
         justify-content: space-between
     }
+
+    .prod-div {
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
-@media (max-width: 480px) {
-    nav .menu {
+@media (max-width: 700px) {
+    .mainFooter {
+
         display: flex;
-    }
-
-    nav {
         flex-direction: column;
-        align-items: flex-start;
     }
 
-    nav ul {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        margin-bottom: 0.25rem;
-    }
-
-    nav ul.open {
+    .Footerlistdiv ul {
         display: flex;
-    }
-
-    nav ul li {
-        width: 100%;
+        flex-direction: column;
         text-align: center;
     }
 
-    nav ul li a {
-        margin: 0.2rem 0.5rem;
+    .FooterLogoutButton {
+        /* margin-left: auto; */
+        /* margin-right: 50%; */
     }
 
-    nav .search-bar {
-        order: 1;
-        /* Move the search bar to the bottom of the navbar */
-        width: 100%;
-        /* Make the search bar take up full width */
-        margin-top: 1rem;
-        /* Add some space between the menu and search bar */
+    .FooterButton {
+        /* margin-left: 0;
+        margin-right: 0; */
+    }
+}
+
+@media (max-width: 992px) {
+    .mainbanner {
+        height: calc(50vh - 100px);
+        padding-top: 100px;
+    }
+
+    .mainbanner h1 {
+        font-size: 2rem;
+        /* margin-top: 20px; */
+        width: 40%;
+        /* Adjust the font size for medium screens */
+    }
+
+    .mainbanner h3 {
+        font-size: 1.2rem;
+        /* Adjust the font size for medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .mainbanner {
+        height: calc(50vh - 100px);
+        padding-top: 80px;
+    }
+
+    .mainbanner h1 {
+        font-size: 1.8rem;
+        /* Adjust the font size for smaller screens */
+    }
+
+    .mainbanner h3 {
+        font-size: 1rem;
+        /* Adjust the font size for smaller screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .mainbanner {
+        height: calc(50vh - 100px);
+        padding-top: 60px;
+        padding-left: 20px;
+    }
+
+    .mainbanner h1 {
+        font-size: 1.5rem;
+        /* Adjust the font size for extra small screens */
+    }
+
+    .mainbanner h3 {
+        font-size: 0.9rem;
+        /* Adjust the font size for extra small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .mainbanner {
+        height: calc(40vh - 100px);
+        padding-top: 40px;
+        padding-left: 10px;
+    }
+
+    .mainbanner h1 {
+        font-size: 1.2rem;
+        /* Adjust the font size for the smallest screens */
+    }
+
+    .mainbanner h3 {
+        font-size: 0.8rem;
+        /* Adjust the font size for the smallest screens */
     }
 }

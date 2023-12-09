@@ -18,6 +18,7 @@ import BSRadio from "../../components/BSRadio";
 import '../../components/Navbar/Navbar.css'
 import Footer from "../../components/Footer/Footer";
 import dayjs from "dayjs";
+import '../../components/Navbar/NewNavbar.css'
 // import BSDateTimePicker from "../../component/BSDateTimePIcker";
 
 export default function BookedCar() {
@@ -33,6 +34,11 @@ export default function BookedCar() {
     const [address, setAddress] = useState('');
     const [selectedDate, setSelectedDate] = useState(dayjs('YYYY-MM-DD'));
     const [selectedDateTime, setSelectedDateTime] = useState(dayjs('YYYY-MM-DDT00:00'));
+    const [isActive, setIsActive] = useState(false);
+
+    const toggleMenu = () => {
+        setIsActive(!isActive);
+    };
 
     let nav = useNavigate()
 
@@ -83,90 +89,97 @@ export default function BookedCar() {
             </Box> : (
             <>
                 <nav>
-                    <Link to="/" className="title">
-                    WHEEL CONNECT
-                    </Link>
-                    <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <ul className={menuOpen ? "open" : ""}>
-                        <li>
-                            <button onClick={() => nav('/about')} style={{ width: '80px' }}>
-                                ABOUT
-                            </button>
-                        </li>
-                        <li>
-                            <button onClick={handleProfileClick} style={{ width: '80px' }}>
-                                PROFILE
-                            </button>
-                        </li>
-                        <li>
-                            <button onClick={handleLogoutButton} className={'logoutButton'} >
-                                LOGOUT
-                            </button>
-                        </li>
-                    </ul>
-                </nav>
+                <div onClick={() => nav('/')} className={`logo ${isActive ? 'hide' : ''}`}>
+                    <img src={require("../../Assets/Images/asdasdasdc.png")} style={{ width: '90px', height: '90px', marginTop: -13, cursor: 'pointer' }} />
+                </div>
+                <div className={`navitemsWithoutsearch ${isActive ? 'active' : ''}`}>
+                    <li>
+                        <button onClick={() => nav('/about')} style={{ width: '80px' }}>
+                            ABOUT
+                        </button>
+                    </li>
+                    <li>
+                        <button onClick={handleProfileClick} style={{ width: '80px' }}>
+                            PROFILE
+                        </button>
+                    </li>
+                    <li>
+                        <button onClick={handleLogoutButton} className={'logoutButton'} >
+                            LOGOUT
+                        </button>
+                    </li>
+                </div>
+            </nav>
                 <Container>
-                    <div style={{ display: "flex" }}>
+                <div className='transporterbookedCar'>
                         <div>
-                            <div style={{ marginTop: '20px' }}>
-                                <img src={data.image} style={{ width: '40vw' }} />
+                            <div className="TransporterBookedCarImage">
+
+                                <img src={data.image1} className="TransporterBookedCarpic" />
                             </div>
-                            <div>
-                                <Typography variant="h4" style={{ textTransform: 'uppercase', padding: '5px', width: '40vw' }} >
-                                    {data.carName}
+                        </div>
+                        <div style={{ width: '500px' }}>
+                            <div style={{ marginTop: '40px' }}>
+                                <Typography variant="h3" style={{ textTransform: 'uppercase', padding: '5px', width: '40vw', paddingLeft: 0 }} >
+                                    {data.companyName} {data.modelName}
                                 </Typography>
                             </div>
                             <div>
-                                <h4 style={{ color: '#535969', padding: '5px' }}>Cost (per hour): {data.cost}</h4>
+                                <h4 style={{ color: '#535969', padding: '5px', paddingLeft: 0 }}>Cost (per hour): {data.cost}</h4>
                             </div>
                             <div style={{ display: 'flex' }}>
                                 <div>
-                                    <p>Model:</p>
-                                    <p>Availability:</p>
-                                    <p>Booking Type:</p>
-                                    <p>Description:</p>
+                                    {/* <p className="bookedcarpara">Model:</p> */}
+                                    <p className="bookedcarpara">Availability:</p>
+                                    <p className="bookedcarpara">Booking Type:</p>
+                                    <p className="bookedcarpara">Description:</p>
+                                    <p className="bookedcarpara">Engine Type:</p>
                                 </div>
                                 <div style={{ marginLeft: '30px' }}>
-                                    <p>{data.modelname}</p>
-                                    <p>{data.available}</p>
-                                    <p>{data.bookingType}</p>
-                                    <p>{data.description}</p>
+                                    {/* <p className="bookedcarpara2" >{data.modelname}</p> */}
+                                    <p className="bookedcarpara2" >{data.available}</p>
+                                    <p className="bookedcarpara2" >{data.bookingType}</p>
+                                    <p className="bookedcarpara2" >{data.description}</p>
+                                    <p className="bookedcarpara2" >{data.engineType}</p>
                                 </div>
                             </div>
-                        </div>
-                        <div style={{ margin: 30 }}>
-                            <div style={{ marginTop: '10px' }}>
+                            <div >
                                 <div style={{ display: 'flex' }}>
                                     <div>
-                                        <p>Location:</p>
-                                        <p>Pick-up Time:</p>
-                                        <p>Drop-off Date:</p>
-                                        <p>Transporter:</p>
+                                        <p className="bookedcarpara">Location:</p>
+                                        <p className="bookedcarpara">Pick-up Time:</p>
+                                        <p className="bookedcarpara">Drop-off Date:</p>
+                                        <p className="bookedcarpara">Transporter:</p>
                                     </div>
                                     <div style={{ marginLeft: '30px' }}>
-                                        <p>{data.address}</p>
-                                        <p>{data.selectedDateTime}</p>
-                                        <p>{data.selectedDate}</p>
-                                        <p>{data.userName}</p>
+                                        <p className="bookedcarpara2" >{data.address}</p>
+                                        <p className="bookedcarpara2" >{data.selectedDateTime}</p>
+                                        <p className="bookedcarpara2" >{data.selectedDate}</p>
+                                        <p className="bookedcarpara2" >{data.userName}</p>
                                     </div>
                                 </div>
                             </div>
                             <h3 style={{ textDecoration: 'underline' }}>Features</h3>
                             <div style={{ display: 'flex' }}>
                                 <div>
-                                    <p>AC:</p>
-                                    <p>Bluetooth:</p>
-                                    <p>GPS:</p>
-                                    <p>Usb Port:</p>
+                                    <p className="bookedcarpara">AC:</p>
+                                    <p className="bookedcarpara">Bluetooth:</p>
+                                    <p className="bookedcarpara">GPS:</p>
+                                    <p className="bookedcarpara">Usb Port:</p>
+                                    <p className="bookedcarpara">AirBags:</p>
+                                    <p className="bookedcarpara">Cassette Player:</p>
+                                    <p className="bookedcarpara">Front Camera:</p>
+                                    <p className="bookedcarpara">Sun Roof:</p>
                                 </div>
                                 <div style={{ marginLeft: '30px' }}>
-                                    <p>{data.ac ? 'Avaialble' : 'Not Available'}</p>
-                                    <p>{data.bluetooth ? 'Avaialble' : 'Not Available'}</p>
-                                    <p>{data.gps ? 'Avaialble' : 'Not Available'}</p>
-                                    <p>{data.usbPort ? 'Avaialble' : 'Not Available'}</p>
+                                    <p className="bookedcarpara2" >{data.ac ? 'Avaialble' : 'Not Available'}</p>
+                                    <p className="bookedcarpara2" >{data.bluetooth ? 'Avaialble' : 'Not Available'}</p>
+                                    <p className="bookedcarpara2" >{data.gps ? 'Avaialble' : 'Not Available'}</p>
+                                    <p className="bookedcarpara2" >{data.usbPort ? 'Avaialble' : 'Not Available'}</p>
+                                    <p className="bookedcarpara2" >{data.airBags ? 'Avaialble' : 'Not Available'}</p>
+                                    <p className="bookedcarpara2" >{data.cassettePlayer ? 'Avaialble' : 'Not Available'}</p>
+                                    <p className="bookedcarpara2" >{data.frontCamera ? 'Avaialble' : 'Not Available'}</p>
+                                    <p className="bookedcarpara2" >{data.sunRoof ? 'Avaialble' : 'Not Available'}</p>
                                 </div>
                             </div>
 

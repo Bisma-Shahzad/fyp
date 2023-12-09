@@ -8,183 +8,380 @@ import BSScreenHeadercar from "../../components/BSScreenHeadercar";
 import BSButton from "../../components/BSButton";
 import UserCard from "../../components/UserCard";
 import SearchBargpt from "../../components/Searchbar/searchbargpt";
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from "@mui/material/CircularProgress";
 import { Navbar } from "../../components/Navbar/Navbar";
-import '../../components/Navbar/Navbar.css'
+import "../../components/Navbar/Navbar.css";
+// import "../../components/Navbar/NewNavbar.css";
+import "../../components/Navbar/Navbar.css";
+import "../../components/Navbar/main.css";
 import { Link, NavLink } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import { removeDataFromLocalStorage } from "../../Utils/getAndSetInLocalStorage";
 import { removeUserDataFromAsyncStorage } from "../../config/redux/reducer/AuthReducer";
+import { useRef } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
+import SearchIcon from "@mui/icons-material/Search";
+import BSFilterDropdown from "../../components/BSFilterDropdown";
+import SelectAutoWidth from "../../components/BSSelect";
+import BSMultipleSelect from "../../components/BSMultipleSelect";
 
 export default function Home() {
-    const dispatch = useDispatch();
-    let nav = useNavigate()
-    const userAuth = useSelector(state => state.AuthReducer.userData);
+  const dispatch = useDispatch();
+  let nav = useNavigate();
+  const userAuth = useSelector((state) => state.AuthReducer.userData);
+  console.log("userAuth on home screen", userAuth);
 
-    const [listData, setListData] = useState([]);
-    const [searchProd, setSearchProd] = useState('');
-    const [loader, setLoader] = useState(true)
-    const [menuOpen, setMenuOpen] = useState(false);
+  const [listData, setListData] = useState([]);
+  const [originalData, setOriginalData] = useState([]); // Store the original data
+  const [searchProd, setSearchProd] = useState("");
+  const [bookingTypeSelect, setBookingTypeSelect] = useState("");
+  const [loader, setLoader] = useState(true);
+  const [suggestions, setSuggestions] = useState([]);
+  const bookingType = ["With Driver", "Self Drive", "Both"];
+  const [selectedMultiValue, setSelectedMultiValue] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState("");
 
-    // console.log('userAuth at homescreen: ', userAuth);
+  const handleSelectChange = (value) => {
+    setSelectedFilter(value); // Update selectedFilter when value changes
+  };
 
-    let getData = async () => {
-        // console.log('userAuth?.instituteType: ', userAuth?.instituteType);
-        setLoader(true)
-        await getIdData("cars", '')
-            .then((res) => {
-                // console.log(res)
-                // console.log('necha wala chal rha hain');
-                const result = Object.values(res).flatMap((value) =>
-                    Object.values(value)
-                        .map(({
-                            ac, bluetooth, carName, cost, description, gps, id, image, modelname, usbPort, userName, userid, available
-                        }) => ({
-                            ac, bluetooth, carName, cost, description, gps, id, image, modelname, usbPort, userName, userid, available
-                        }))
-                );
+  console.log("listData", listData);
 
-                // console.log(result);
-                setListData(result);
-                setLoader(false)
+  const handleMultiChange = (values) => {
+    setSelectedMultiValue(values);
+    console.log("selectedMultiValue", values);
+  };
+
+  console.log("selectedmultiValue", selectedMultiValue);
+
+  const fetchSuggestions = async () => {
+    // Extract unique company names and model names from listData
+    const uniqueCompanyNames = [
+      ...new Set(listData.map((item) => item.companyName.toLowerCase())),
+    ];
+    const uniqueModelNames = [
+      ...new Set(listData.map((item) => item.modelName.toLowerCase())),
+    ];
+
+    // Combine and set suggestions
+    const fetchedSuggestions = [...uniqueCompanyNames, ...uniqueModelNames];
+    setSuggestions(fetchedSuggestions);
+  };
+
+  useEffect(() => {
+    fetchSuggestions();
+  }, [listData]);
+
+  const navRef = useRef();
+
+  const showNavbar = () => {
+    navRef.current.classList.toggle("responsive_nav");
+  };
+
+  let getData = async () => {
+    // console.log('userAuth?.instituteType: ', userAuth?.instituteType);
+    setLoader(true);
+    await getIdData("cars", "")
+      .then((res) => {
+        console.log("res on get id data on home page", res);
+        console.log("object.keys(res)", Object.keys(res));
+        // console.log('necha wala chal rha hain');
+        const result = Object.values(res).flatMap((value) =>
+          Object.values(value).map(
+            ({
+              ac,
+              airBags,
+              bluetooth,
+              bookingType,
+              cassettePlayer,
+              color,
+              companyName,
+              cost,
+              description,
+              engineType,
+              frontCamera,
+              gps,
+              id,
+              image1,
+              image2,
+              image3,
+              image4,
+              modelName,
+              modelYear,
+              sunRoof,
+              usbPort,
+              userName,
+              userid,
+              available,
+            }) => ({
+              ac,
+              airBags,
+              bluetooth,
+              bookingType,
+              cassettePlayer,
+              color,
+              companyName,
+              cost,
+              description,
+              engineType,
+              frontCamera,
+              gps,
+              id,
+              image1,
+              image2,
+              image3,
+              image4,
+              modelName,
+              modelYear,
+              sunRoof,
+              usbPort,
+              userName,
+              userid,
+              available,
             })
-            .catch((err) => {
-                // console.log('no data found')
-                setLoader(false)
-            })
-    }
+          )
+        );
 
-    useEffect(() => {
-        // async () => {
-        setLoader(true)
-        getData();
-        // console.log('else is working');
-        setLoader(false)
-    }, [userAuth?.instituteType]);
+        // console.log(result);
+        setOriginalData(result); // Store the original data
+        setListData(result);
+        const filteredData = result.filter(
+          (item) => item.userid !== userAuth.id
+        );
+        setListData(filteredData);
+        setOriginalData(filteredData); // Store the original data
+        setLoader(false);
+      })
+      .catch((err) => {
+        // console.log('no data found')
+        setLoader(false);
+      });
+  };
 
-    // console.log(listData)
+  useEffect(() => {
+    // async () => {
+    setLoader(true);
+    getData();
+    // console.log('else is working');
+    setLoader(false);
+  }, [userAuth]);
 
-    const handleSearch = (text) => {
-        setSearchProd(text)
-    };
+  useEffect(() => {
+    // async () => {
+    setLoader(true);
+    // fetchDriverType();
+    // Filter the data based on the selectedFilter
+    const updatedFilteredData = originalData.filter(
+      (item) => item.bookingType === selectedFilter
+    );
+    setListData(updatedFilteredData);
+    // console.log('else is working');
+    setLoader(false);
+  }, [selectedFilter]);
 
-    const getProduct = (e) => {
-        nav('/cardetails', {
-            state: e
-        })
-        // console.log(e)
-    }
+  // console.log(listData)
 
-    const handleLoginClick = () => {
-        const userType = 'User'; // or any other value
-        nav('/login', {
-            state: userType
-        });
-        // console.log('loginButton')
-    }
+  const handleSearch = (text) => {
+    setSearchProd(text);
+  };
 
-    const handleListVehicle = () => {
-        const userType = 'Transporter'; // or any other value
-        nav('/login', {
-            state: userType
-        });
-        // console.log('loginButton')
-    }
+  const FilterBookingType = (text) => {
+    setBookingTypeSelect(text);
+  };
 
-    const handleProfileClick = () => {
-        nav('/profile')
-        // console.log('ProfileButton')
-    }
+  const getProduct = (e) => {
+    nav("/cardetails", {
+      state: e,
+    });
+    // console.log(e)
+  };
 
-    const handleLogoutButton = async () => {
-        removeDataFromLocalStorage('token');
-        removeDataFromLocalStorage('user');
-        dispatch(removeUserDataFromAsyncStorage());
-    }
+  const handleLoginClick = () => {
+    nav("/login");
+    // console.log('loginButton')
+  };
 
-    return <>
-        {loader ? <Box
-                sx={{ height: "80vh" }}
-                className="d-flex justify-content-center align-items-center "
-            >
+  const handleProfileClick = () => {
+    nav("/profile");
+    // console.log('ProfileButton')
+  };
+
+  const handleLogoutButton = async () => {
+    removeDataFromLocalStorage("token");
+    removeDataFromLocalStorage("user");
+    dispatch(removeUserDataFromAsyncStorage());
+  };
+
+  const TransporterPage = () => {
+    nav("/cars");
+  };
+
+  return (
+    <>
+      {loader ? (
+        <Box
+          sx={{ height: "80vh" }}
+          className="d-flex justify-content-center align-items-center "
+        >
+          <Spinner animation="border" style={{}} />
+        </Box>
+      ) : (
+        <>
+          <header>
+            <div onClick={() => nav("/")} className={`logo `}>
+              <img
+                src={require("../../Assets/Images/asdasdasdc.png")}
+                style={{
+                  width: "90px",
+                  height: "90px",
+                  marginTop: -9,
+                  cursor: "pointer",
+                }}
+              />
+            </div>
+            <nav ref={navRef}>
+              <a onClick={() => nav("/")} className="navbarlink">
+                Home
+              </a>
+              <a onClick={() => nav("/about")} className="navbarlink">
+                About
+              </a>
+              {userAuth ? (
+                <a onClick={handleProfileClick} className="navbarlink">
+                  Profile
+                </a>
+              ) : (
+                <a onClick={handleLoginClick} className="navbarlink">
+                  Login
+                </a>
+              )}
+              {userAuth ? (
+                <a onClick={TransporterPage} className="navbarlink">
+                  Add Your Vehicle
+                </a>
+              ) : null}
+              {userAuth ? (
+                <a onClick={handleLogoutButton} className="navbarlink">
+                  Logout
+                </a>
+              ) : null}
+              <button className="nav-btn nav-close-btn" onClick={showNavbar}>
+                <FaTimes />
+              </button>
+            </nav>
+            <button className="nav-btn" onClick={showNavbar}>
+              <FaBars />
+            </button>
+          </header>
+
+          <div className="mainbanner"></div>
+          <Container>
+            <div className="carsavaialble"></div>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <SearchBargpt
+                label="Search cars"
+                onSearch={handleSearch}
+                suggestions={suggestions}
+              />
+              {/* <BSFilterDropdown
+                label="Booking Type"
+                suggestions={bookingType}
+                onSearch={FilterBookingType}
+              /> */}
+              <SelectAutoWidth
+                label="Search Booking Type"
+                minWidth="300px"
+                searchList={[
+                  {
+                    displayName: "With Driver",
+                    key: "withdriver",
+                  },
+                  {
+                    displayName: "Self Drive",
+                    key: "selfdrive",
+                  },
+                  {
+                    displayName: "Both",
+                    key: "both",
+                  },
+                ]}
+                selectedval={handleSelectChange}
+              />
+              {/* <BSMultipleSelect
+                label="Search Booking Type"
+                minWidth="200px"
+                searchList={[
+                  {
+                    displayName: "User Name",
+                    key: "name",
+                  },
+                  {
+                    displayName: "User Email",
+                    key: "email",
+                  },
+                ]}
+                selectedVals={handleMultiChange} // Pass the callback function
+              /> */}
+            </div>
+            {loader ? (
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
                 <Spinner animation="border" style={{}} />
-            </Box> : (
-            <>
-                <nav>
-                    <Link to="/" className="title">
-                        WHEEL CONNECT
-                    </Link>
-                    <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <div className="search-bar">
-                        <SearchBargpt label="Search cars" onSearch={handleSearch} />
-                    </div>
-                    <ul className={menuOpen ? "open" : ""}>
-                        <li>
-                            <button onClick={() => nav('/about')} style={{ width: '80px' }}>
-                                ABOUT
-                            </button>
-                        </li>
-                        <li>
-                            {userAuth?.instituteType == 'User' ? (
-                                <button onClick={handleProfileClick} style={{ width: '80px' }}>
-                                    PROFILE
-                                </button>
-                            ) : (
-                                <button onClick={handleLoginClick} style={{ width: '80px' }}>
-                                    LOGIN
-                                </button>)}
-                        </li>
-                        <li>
-                            {userAuth?.instituteType == 'User' ?
-                                (
-                                    <button onClick={handleLogoutButton} className={'logoutButton'} >
-                                        LOGOUT
-                                    </button>
-                                ) : (
-                                    <button onClick={handleListVehicle} className={'listvehicle'} >
-                                        LIST YOUR VEHICLE
-                                    </button>)}
-                        </li>
-                    </ul>
-                </nav>
-                <div className="mainbanner">
-                    <h1 style={{ padding: 0 }}>Welcome to WHEEL CONNECT</h1>
-                    <h3 style={{ padding: 0 }}>Your Ultimate Car Rental Platform!</h3>
+              </div>
+            ) : (
+              <div>
+                {/* {listData.length === 0 ? (
+                  <div>
+                    <img
+                      src={require("../../Assets/Images/no_cars_search.png")}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        marginVerticle: "50px",
+                        cursor: "pointer",
+                      }}
+                    />
+                  </div>
+                ) : ( */}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  {listData
+                    .filter(
+                      (x) =>
+                        searchProd
+                          ? x.companyName.toLowerCase().includes(searchProd) ||
+                            x.modelName.toLowerCase().includes(searchProd)
+                          : true // Show all cars when searchProd is empty
+                    )
+                    .map((x, i) => {
+                      return (
+                        <UserCard
+                          title={x.companyName + " " + x.modelName}
+                          src={x.image1}
+                          price={x.cost}
+                          onClick={() => getProduct(x)}
+                        />
+                      );
+                    })}
                 </div>
-                <Container>
-                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                        
-                            <h1 style={{ color: '#535969', borderBottom: '3px double #283043', marginBottom: '5%' }}>
-                                CARS AVAILABLE AT WHEEL CONNECT
-                            </h1>
-                    </div>
-                    {loader ? <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                        <Spinner animation="border" style={{}} />
-                    </div> :
-                        <div>
-                            {listData.length === 0 ? (
-                                <div>
-                                    <img src={require("../../Assets/Images/no_cars_search.png")} style={{ width: '100%', height: '100%', marginVerticle: '50px' }} />
-                                </div>
-                            ) : (
-                                <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-                                    {listData.filter((x) => x.carName.toLowerCase().includes(searchProd)).map((x, i) => {
-                                        return (
-                                            <UserCard title={x.carName} src={x.image} price={x.cost}
-                                                onClick={() => getProduct(x)}
-                                            />
-                                        )
-                                    })}
-                                </div>
-                            )}
-                        </div>}
-                </Container >
-                <Footer />
-            </>
-        )}
+                {/* )} */}
+              </div>
+            )}
+          </Container>
+          <Footer />
+        </>
+      )}
     </>
+  );
 }
 // .filter((x) => x.title.toLowerCase().includes(searchProd))

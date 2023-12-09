@@ -1,0 +1,464 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: #f2f2f2;
+}
+
+nav {
+    background: #171c24;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    padding: 0 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav .logo {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -1px;
+}
+
+nav .menu {
+    display: none;
+    position: absolute;
+    top: 0.75rem;
+    right: 0.5rem;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 2.25rem;
+    height: 2rem;
+}
+
+nav .menu span {
+    height: 0.4rem;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 0.2rem;
+}
+
+nav .nav-items {
+    display: flex;
+    flex: 1;
+    padding: 0 0 0 40px;
+
+}
+
+nav .nav-items li {
+    list-style: none;
+    padding: 0 15px;
+}
+
+nav .nav-items li button {
+    margin-Right: 10px;
+    display: block;
+    color: white;
+    padding: 0.7rem;
+    font-size: 30;
+    cursor: pointer;
+    /* margin-top: 13px; */
+    border: none;
+    background-color: #171c24;
+    border-radius: 0.5rem;
+}
+
+nav .nav-items li button:hover {
+    font-weight: bold;
+}
+
+nav .navitemsWithoutsearch {
+    display: flex;
+    flex: 1;
+    padding: 0 0 0 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+nav .navitemsWithoutsearch li {
+    list-style: none;
+    padding: 0 15px;
+}
+
+nav .navitemsWithoutsearch li button {
+    margin-Right: 10px;
+    display: block;
+    color: white;
+    padding: 0.7rem;
+    font-size: 30;
+    cursor: pointer;
+    /* margin-top: 13px; */
+    border: none;
+    background-color: #171c24;
+    border-radius: 0.5rem;
+}
+
+nav .navitemsWithoutsearch li button:hover {
+    font-weight: bold;
+}
+
+nav .menu-icon,
+nav .cancel-icon,
+nav .search-icon {
+    width: 40px;
+    text-align: center;
+    margin: 0 50px;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+    display: none;
+}
+
+nav .menu-icon span,
+nav .cancel-icon,
+nav .search-icon {
+    display: none;
+}
+
+nav .nav-items li .listvehicle {
+    width: 200px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    margin-right: 40px;
+    margin-left: 5px;
+}
+
+nav .nav-items li .logoutButton {
+    width: 100px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    margin-right: 40px;
+    margin-left: 5px;
+}
+
+nav .navitemsWithoutsearch li .listvehicle {
+    width: 200px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    margin-right: 40px;
+    margin-left: 5px;
+}
+
+nav .navitemsWithoutsearch li .logoutButton {
+    width: 100px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    margin-right: 40px;
+    margin-left: 5px;
+}
+
+nav .HomeSearchbar {
+    width: 40vw
+}
+
+.TransporterBookedCarImage {
+    margin-top: 100px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* @media (max-width: 1245px) {
+    nav {
+        padding: 0 50px;
+    }
+}
+
+@media (max-width: 1250px) {
+    nav .HomeSearchbar {
+        width: 30vw;
+    }
+} */
+
+.Transportermainpagehead {
+    color: #535969;
+    border-bottom: 3px double #283043;
+    margin-bottom: 5%;
+    text-align: center;
+    text-transform: uppercase
+}
+
+@media (max-width: 1140px) { 
+/*
+
+    .menu-toggler.active+.search-icon,
+    .search-icon.active+.menu-toggler {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 80px;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    .nav-items {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #14181f;
+        text-align: center;
+    }
+
+    .nav-items.active {
+        display: flex;
+    }
+
+    .nav-items li {
+        margin: 5px 0;
+        margin-top: -5px;
+    } */
+
+    /* .navitemsWithoutsearch {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #14181f;
+        text-align: center;
+    }
+
+    .navitemsWithoutsearch.active {
+        display: flex;
+    } */
+
+    /* .navitemsWithoutsearch li {
+        margin: 5px 0;
+        margin-top: -10px;
+    }
+
+    .menu-toggler.active+.search-icon .fa-search,
+    .search-icon.active+.menu-toggler .fa-search {
+        display: none;
+    }
+
+    .search-icon.active+.menu-toggler .fa-bars,
+    .menu-toggler.active+.search-icon .fa-bars {
+        display: none;
+    }
+
+    .search-icon.active+.search-form {
+        display: flex;
+        position: absolute;
+        top: 70px;
+        right: 20px;
+    }
+
+    nav .nav-items li button {
+        padding: 0.5rem;
+        font-size: 20;
+        margin-top: 10px;
+    }
+
+    nav .navitemsWithoutsearch li button {
+        padding: 0.5rem;
+        font-size: 20;
+        margin-top: 10px;
+    }
+
+    nav .HomeSearchbar {
+        width: 40vw
+    } */
+    .yourcarshead {
+        margin-top: 40px;
+    }
+    .Transportermainpagehead {
+        margin-top: 60px;
+    }
+}
+
+.yourcarshead {
+    color: rgb(67, 67, 67);
+    border-bottom: 3px double #283043;
+    margin-bottom: 5%;
+    /* text-align: center;
+    margin-right: auto;
+    margin-left: auto; */
+}
+
+/* @media (max-width: 980px) {
+
+    nav .menu-icon,
+    nav .cancel-icon,
+    nav .search-icon {
+        margin: 0 20px;
+    }
+
+    nav form {
+        right: 30px;
+    }
+} */
+
+@media (max-width: 710px) {
+    /* nav .logo {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .navitemsWithoutsearch {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #14181f;
+        text-align: center;
+    }
+
+    .navitemsWithoutsearch.active {
+        display: flex;
+    }
+
+    .navitemsWithoutsearch li {
+        margin: 5px 0;
+        margin-top: -5px;
+    } */
+
+    .TransporterBookedCarImage {
+        margin-top: 100px;
+    }
+    .AboutMainHead {
+        margin-top: 100px;
+    }
+}
+
+/* @media (max-width: 350px) {
+
+    nav .menu-icon,
+    nav .cancel-icon,
+    nav .search-icon {
+        margin: 0 10px;
+        font-size: 16px;
+    }
+}
+@media (max-width: 350px) {
+
+    nav .menu-icon,
+    nav .cancel-icon,
+    nav .search-icon {
+        margin: 0 10px;
+        font-size: 16px;
+    }
+} */
+
+
+/* ... your existing CSS ... */
+
+/* @media (max-width: 550px) {
+    nav .logo {
+        font-size: 14px;
+    }
+
+    nav .nav-items li button {
+        padding: 0.3rem;
+        font-size: 15px;
+    }
+
+    nav .nav-items li .logoutButton {
+        width: 100px;
+        background-color: white;
+        color: #283043;
+        cursor: pointer;
+        margin-right: 40px;
+        margin-left: 5px;
+    }
+
+    nav .navitemsWithoutsearch li button {
+        padding: 0.3rem;
+        font-size: 15px;
+    }
+
+    nav .navitemsWithoutsearch li .logoutButton {
+        width: 100px;
+        background-color: white;
+        color: #283043;
+        cursor: pointer;
+        margin-right: 40px;
+        margin-left: 5px;
+    }
+} */
+
+@media (max-width: 710px) {
+    /* Styles for small screens */
+    /* .navitemsWithoutsearch {
+        display: none;
+    }
+
+    .sidebar {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: -200px;
+        height: 100vh;
+        width: 200px;
+        background-color: #171c24;
+        padding-top: 70px;
+        transition: left 0.3s ease;
+        z-index: 999;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .menu-toggler {
+        display: block;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        font-size: 24px;
+        color: #fff;
+        cursor: pointer;
+        z-index: 1000;
+    } */
+}
+
+@media (max-width: 480px) {
+    nav .menu {
+        display: flex;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 0.25rem;
+    }
+
+    nav ul.open {
+        display: flex;
+    }
+
+    nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    nav ul li a {
+        margin: 0.2rem 0.5rem;
+    }
+} 

@@ -66,13 +66,14 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 export default function SelectAutoWidth(props) {
-  const { minWidth, label, searchList, fullWidth, selectedval } = props
+  const { minWidth, label, searchList, fullWidth, selectedval } = props;
 
   const [select, setSelect] = React.useState('');
 
   const handleChange = (event) => {
-    setSelect(event.target.value);
-    selectedval(event.target.value)
+    const selectedValue = event.target.value;
+    setSelect(selectedValue);
+    selectedval(selectedValue); // Call the callback function with the selected value
   };
 
   return (
@@ -84,15 +85,14 @@ export default function SelectAutoWidth(props) {
           id="demo-simple-select-autowidth"
           onChange={handleChange}
           value={select}
-          autoWidth
+          minWidth={'400px'}
           label={label}
-
         >
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
           {searchList.map((x, i) => (
-            <MenuItem value={x.displayName} key={x.key}  >
+            <MenuItem value={x.displayName} key={x.key}>
               {x.displayName}
             </MenuItem>
           ))}

@@ -11,7 +11,7 @@ function UserCard(a) {
             <div className="prod-desc">
                 <h4 className="prod-name">{a.title}</h4>
 
-                <h5 className="prod-rate">Price: Rs{a.price}<span style={{ color: '#acaeb1', fontWeight: 'normal', fontSize: '15px' }}>(per hour)</span></h5>
+                <h5 className="prod-rate">Rs.{a.price}<span style={{ color: '#acaeb1', fontWeight: 'normal', fontSize: '15px' }}>(per hour)</span></h5>
             </div>
         </div>
     {/* <div className="prod-div first-prod-div" onClick={props.onClick}>

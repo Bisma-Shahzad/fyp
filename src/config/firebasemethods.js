@@ -1,5 +1,5 @@
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { getDatabase, set, ref, onValue, push, remove } from "firebase/database";
+import { getDatabase, set, ref, onValue, push, remove, update } from "firebase/database";
 import app from "./firebaseconfig";
 
 
@@ -10,10 +10,10 @@ const db = getDatabase(app);
 
 let signUpUser = (obj) => {
     return new Promise((resolve, reject) => {
-        createUserWithEmailAndPassword(auth, obj.email, obj.password, obj.instituteType)
+        createUserWithEmailAndPassword(auth, obj.email, obj.password)
             .then((res) => {
                 obj.id = res.user.uid;
-                const reference = ref(db, `users/${obj.instituteType}/${obj.id}`);
+                const reference = ref(db, `users/${obj.id}`);
                 set(reference, obj)
                     .then(() => {
                         resolve("Data Send Successfully in Database and User Created");
@@ -32,7 +32,7 @@ let loginUser = (obj) => {
     return new Promise((resolve, reject) => {
         signInWithEmailAndPassword(auth, obj.email, obj.password)
             .then((res) => {
-                const reference = ref(db, `users/User/${res.user.uid}`)
+                const reference = ref(db, `users/${res.user.uid}`)
                 onValue(reference, (data) => {
                     if (data.exists()) {
                         
@@ -77,13 +77,55 @@ let postFbData = (nodeName, obj) => {
         let postRef = ref(db, `${nodeName}/${obj.userid}/${obj.id}`);
         set(postRef, obj)
             .then((res) => {
-                resolve("Data Send Successfully")
+                resolve("res of postfbdata aaaaa", obj.id)
+                console.log("res of postfbdata", obj.id)
             })
             .catch((err) => {
                 reject(err.message)
             })
     })
 }
+let postCarData = (nodeName, obj) => {
+    return new Promise((resolve, reject) => {
+        // let keyRef = ref(db, `${nodeName}/`);
+        // obj.id = push(keyRef).key;
+
+        let postRef = ref(db, `${nodeName}/${obj.userid}/${obj.carNumber}`);
+        set(postRef, obj)
+            .then((res) => {
+                resolve("res of postfbdata aaaaa", obj.id)
+                console.log("res of postfbdata", obj.id)
+            })
+            .catch((err) => {
+                reject(err.message)
+            })
+    })
+}
+
+let editFbData = (obj) => {
+    return new Promise((resolve, reject) => {
+        let postRef = ref(db, `users/${obj.id}`);
+        update(postRef, obj)
+            .then(() => {
+                resolve("Data Updated Successfully");
+            })
+            .catch((err) => {
+                reject(err.message);
+            });
+    });
+};
+let editCarData = (nodeName, obj, carNumber) => {
+    return new Promise((resolve, reject) => {
+        let postRef = ref(db, `${nodeName}/${obj.userid}/${carNumber}`);
+        update(postRef, obj)
+            .then(() => {
+                resolve("Data Updated Successfully");
+            })
+            .catch((err) => {
+                reject(err.message);
+            });
+    });
+};
 
 let postFbDatacustomer = (nodeName, obj) => {
     return new Promise((resolve, reject) => {
@@ -134,6 +176,7 @@ let postFbDataBooking = (nodeName, obj) => {
         // Include booking IDs in the object
         obj.customerBookingId = customerBookingId;
         obj.transporterBookingId = transporterBookingId;
+        console.log('obj in postFbDataBooking', obj)
 
         let postRef = ref(db, `${nodeName}/${obj.customerid}/${customerBookingId}`);
         set(postRef, obj)
@@ -192,9 +235,9 @@ let getData = (nodeName) => {
     })
 }
 
-let getCustomerData = (nodeName, user, id) => {
+let getCustomerData = (nodeName, id) => {
     return new Promise((resolve, reject) => {
-        let reference = ref(db, `${nodeName}/${user}/${id}`);
+        let reference = ref(db, `${nodeName}/${id}`);
         onValue(reference, (snapshot) => {
             const data = snapshot.val();
             if (data) {
@@ -251,18 +294,18 @@ let getIdData = (nodeName, id) => {
 })
 }
 
-let deletedata = (nodeName, userid, id) => {
+const deletedata = (nodeName, userId, id) => {
     return new Promise((resolve, reject) => {
-    const reference = ref(db, `${nodeName}/${userid}/${id}`)
-    remove(reference)
-    .then((res) => {
-        resolve("Data Deleted Successfully")
-    })
-    .catch((err) => {
-        reject(err.message);
+        const reference = ref(db, `${nodeName}/${userId}/${id}`);
+        remove(reference)
+            .then(() => {
+                resolve("Data Deleted Successfully");
+            })
+            .catch((err) => {
+                reject(err.message);
+            });
     });
-    })
-}
+};
 
 let userLogout = () => {
     return new Promise((resolve, reject) => {
@@ -291,4 +334,4 @@ let checkAuth = () => {
 
 
 
-export { loginUser, signUpUser, postFbDataBooking, getCustomerData, postFbData, fbCustonPost, getData, getFbData, getprofileData, deletedata, checkAuth, postFbDatacustomer, userLogout, loginTransporter, getIdData };
+export { loginUser, signUpUser, editCarData, postFbDataBooking, postCarData, editFbData, getCustomerData, postFbData, fbCustonPost, getData, getFbData, getprofileData, deletedata, checkAuth, postFbDatacustomer, userLogout, loginTransporter, getIdData };

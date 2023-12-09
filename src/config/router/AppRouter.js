@@ -22,6 +22,8 @@ import TransporterBookedCar from "../../screens/adminscreens/TransporterBookedCa
 import TransporterCarDetail from "../../screens/adminscreens/TransporterCarDetail";
 import { Box } from "@mui/material";
 import TransporterMainPage from "../../screens/userscreens/TransporterMainPage";
+import EditProfile from "../../screens/userscreens/EditProfile";
+import EditCars from "../../screens/adminscreens/EditCar";
 
 
 function AppRouter() {
@@ -114,6 +116,8 @@ function AppRouter() {
                                 <Route path="cardetails" element={<CarDetails />} />
                                 <Route path="addcars" element={<AddCars />} />
                                 <Route path="profile" element={<Profile />} />
+                                <Route path="editprofile" element={<EditProfile />} />
+                                <Route path="editcars" element={<EditCars />} />
                                 <Route path="booknow" element={<BookNow />} />
                                 <Route path="bookedCar" element={<BookedCar />} />
                                 <Route path="transporterprofile" element={<TransporterProfile />} />
